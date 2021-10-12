@@ -10,8 +10,10 @@ for x in range(1, N):
     y = x + 1
     z = y + 1
     while z <= N:
+        # find the first z that satisfies z^2 >= x^2 + y^2
         while z**2 < x**2 + y**2:
             z += 1
+        # if z^2 = x^2 + y^2 we have found the correct values for x,y and z else increment y
         if z**2 == x**2 + y**2:
             if x+y+z == 1000:
                 print("x:{}, y:{}, z:{}, xyz:{}".format(x, y, z, x*y*z))
