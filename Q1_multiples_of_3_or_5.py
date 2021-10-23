@@ -1,7 +1,12 @@
-sum = 0
+def main():
+    total = 0
 
-for x in range(1000):
-    if x % 5 == 0 or x % 3 == 0:
-        sum += x
+    for x in range(1000):
+        if x % 5 == 0 or x % 3 == 0:
+            total += x
 
-print(sum)
+    print(total)
+
+
+if __name__ == '__main__':
+    main()
