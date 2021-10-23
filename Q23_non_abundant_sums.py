@@ -16,17 +16,17 @@ def main():
         if factor_sum(i) > i:
             abundant.append(i)
 
-    range_end = max(abundant) * 2 + 1  # largest number we expect to check is the largest abundant number generated doubled
-    sums = [0 for _ in range(range_end)]  # a list of the sums that can be generated with the abundant numbers generated
-
-    # for every combination of abundant numbers set sums value to 1 to indicate it can be the sum of 2 abundant numbers
-    for first in abundant:
-        for second in abundant:
-            sums[first + second] = 1
+    # instance a set of all numbers that are a sum of abundant numbers
+    sums = set()
+    length = len(abundant)
+    # for every combination of numbers
+    for first in range(length):
+        for second in range(first, length):
+            sums.add(abundant[first] + abundant[second])
 
     # for every number between 1 and 28123 (inclusive) check if it can be sum of abundant numbers if not add to total
     for summed_val in range(1, 28124):
-        if sums[summed_val] == 0:
+        if summed_val not in sums:
             total += summed_val
 
     print(total)
