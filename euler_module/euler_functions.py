@@ -9,6 +9,7 @@ def prime_gen(n):
                 primes[i] = False
         divisor += 1
 
+    # set 0 and 1 to False (not- prime) because they are not touched by the sieve above
     primes[0] = False
     primes[1] = False
 
