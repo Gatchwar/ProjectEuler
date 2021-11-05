@@ -1,12 +1,7 @@
-n = 1000000
-primes = [True for i in range(n+1)]
-divisor = 2
+from euler_module.euler_functions import prime_gen
 
-while divisor * divisor < n:
-    if primes[divisor]:
-        for i in range(divisor * divisor, n+1, divisor):
-            primes[i] = False
-    divisor += 1
+n = 1000000
+primes = prime_gen(n)
 
 print("finished generating primes")
 
