@@ -16,6 +16,16 @@ def prime_gen(n):
     return primes
 
 
+# returns a list of prime numbers up to n as integers as opposed to booleans
+def prime_list(n):
+    boolean_primes = prime_gen(n)
+    actual_primes = []
+    for i in range(n):
+        if boolean_primes[i]:
+            actual_primes.append(i)
+    return actual_primes
+
+
 # returns whether an integer n is prime by brute force checking until the square root
 def is_prime(n):
     for i in range(2, int(n ** 0.5) + 1):
