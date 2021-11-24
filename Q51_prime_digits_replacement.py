@@ -1,90 +1,43 @@
 from euler_module.euler_functions import prime_gen
 
-n = 100000
+n = 1000000
 primes = prime_gen(n)
 
-# print("finished generating primes")
-#
-# digits = 6
-#
-#
-# def build(ind1, ind2, dig1, dig2, dig3, dig4):
-#     arr = ['x', 'x', 'x', 'x', 'x', 'x']
-#     arr[ind1] = '*'
-#     arr[ind2] = '*'
-#     for i in range(digits):
-#         if arr[i] == 'x':
-#             arr[i] = dig1
-#             break
-#     for i in range(1, digits):
-#         if arr[i] == 'x':
-#             arr[i] = dig2
-#             break
-#     for i in range(2, digits):
-#         if arr[i] == 'x':
-#             arr[i] = dig3
-#             break
-#     for i in range(3, digits):
-#         if arr[i] == 'x':
-#             arr[i] = dig4
-#             break
-#     return arr
-#
-#
-# def thing(arr, ind1, ind2):
-#     counter = 0
-#     found = False
-#     for i in range(10):
-#         arr[ind1] = str(i)
-#         arr[ind2] = str(i)
-#         val = int(''.join(arr))
-#         if primes[val]:
-#             if not found:
-#                 smallest = val
-#                 found = True
-#             counter += 1
-#
-#     if counter == 7:
-#         print(smallest)
-#
-#
-# def generate_primes():
-#     for j in range(0, digits - 1):
-#         for k in range(j+1, digits):
-#             for l in range(10):
-#                 for m in range(10):
-#                     for o in range(10):
-#                         for p in range(10):
-#                             temp = build(j, k, str(l), str(m), str(o), str(p))
-#                             thing(temp, j, k)
+digs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-# print(build(1, 3, '1', '2', '3'))
-# thing(['1', '2', '1', '3', '1', '3'], 0, 2)
-# primes_list = generate_primes(10000000)
+seen = set()
+consecutive = 8
+
+
+def thing(a, digits):
+    for i in range(digits - 2):
+        for j in range(i + 1, digits - 1):
+            str_num = [dig for dig in str(a)]
+            str_num[i] = str_num[j] = '*'
+            if ''.join(str_num) not in seen:
+                counter = 0
+                for val in digs:
+                    str_num[i] = str_num[j] = val
+                    if primes[int(''.join(str_num))]:
+                        counter += 1
+                        str_num[i] = str_num[j] = '*'
+                        print(''.join(str_num))
+                if counter >= consecutive:
+                    print(a)
+                str_num[i] = '*'
+                str_num[j] = '*'
+                seen.add(''.join(str_num))
+
 
 def main():
-    consecutive = 6
-    for i in range(10, 100):
-        if primes[i]:
-            for index in range(2):
-                if index == 0:
-                    temp = str(i)[1]
-                    counter = 0
-                    for digit in range(1, 10):
-                        if primes[int(str(digit) + temp)]:
-                            counter += 1
-                            if counter == consecutive:
-                                print(int(str(digit) + temp))
-                                break
-                elif index == 1:
-                    temp = str(i)[0]
-                    counter = 0
-                    for digit in range(1, 10):
-                        if primes[int(str(digit) + temp)]:
-                            counter += 1
-                            if counter == consecutive:
-                                print(int('*' + temp))
-                                break
+    digits = 3
+    while True:
+        low = 10 ** (digits-1)
+        high = 10 ** digits
+        for num in range(low, high):
+            if primes[num]:
+                thing(num, digits)
+        digits += 1
 
 
 if __name__ == '__main__':
