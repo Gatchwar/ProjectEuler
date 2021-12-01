@@ -17,7 +17,7 @@ def main():
             cube_str = ''.join(sorted(str(cube)))  # sort the digits of the cube, permutations will share this string
             # if yet to see this string of numbers with this many digits then this is the lowest number with this string
             if cube_str not in temp:
-                temp[cube_str] = [cube, 1]  # create entry in dict with string containing number and a counter set to 1
+                temp[cube_str] = [cube, 1]  # create entry in dict with cube string as key, the number and a counter
             # if this string of numbers has been seen already then this is a permutation of a previous number
             else:
                 temp[cube_str][1] += 1  # increment the counter for this string
