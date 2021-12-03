@@ -32,3 +32,18 @@ def is_prime(n):
         if n % i == 0:
             return False
     return True
+
+
+# Decorator. The underlying function must take only positional arguments, no keyword arguments.
+class memoize:
+    def __init__(self, func):
+        self.func = func
+        self.cache = {}
+
+    def __call__(self, *args):
+        if args in self.cache:
+            return self.cache[args]
+        else:
+            val = self.func(*args)
+            self.cache[args] = val
+            return val
